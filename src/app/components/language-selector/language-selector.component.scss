@@ -1,0 +1,27 @@
+.language-selector {
+    display: flex;
+    align-items: center;
+    gap: 15px; 
+  }
+  
+  .language-option {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    padding: 5px 10px;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+  
+    &:hover {
+      background-color: #e0e0e0; 
+    }
+  
+    .flag-icon {
+      width: 30px;
+      height: 30px; 
+      border-radius: 50%; 
+      object-fit: cover; 
+      margin-right: 5px; 
+    }
+  }
+  

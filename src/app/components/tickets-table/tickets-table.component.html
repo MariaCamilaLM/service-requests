@@ -1,0 +1,91 @@
+<table mat-table [dataSource]="tickets" class="mat-elevation-z8">
+    <!-- ID Column -->
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef>ID</th>
+      <td mat-cell *matCellDef="let ticket">{{ ticket.id }}</td>
+    </ng-container>
+
+    <!-- Title Column -->
+    <ng-container matColumnDef="title">
+      <th mat-header-cell *matHeaderCellDef>
+        {{ "client.table.title" | translate }}
+      </th>
+      <td
+        mat-cell
+        *matCellDef="let ticket"
+        class="open-ticket"
+        (click)="showTicket(ticket.id)"
+      >
+        {{ ticket.title }}
+      </td>
+    </ng-container>
+
+    <!-- Description Column -->
+    <ng-container matColumnDef="description">
+      <th mat-header-cell *matHeaderCellDef>
+        {{ "client.table.description" | translate }}
+      </th>
+      <td mat-cell *matCellDef="let ticket">{{ ticket.issue_description }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="brand">
+      <th mat-header-cell *matHeaderCellDef>
+        {{ "create_ticket.form.brand" | translate }}
+      </th>
+      <td mat-cell *matCellDef="let ticket">{{ ticket.brand }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="serial_number">
+      <th mat-header-cell *matHeaderCellDef>
+        {{ "create_ticket.form.serial_number" | translate }}
+      </th>
+      <td mat-cell *matCellDef="let ticket">{{ ticket.serial_number }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="files_count">
+      <th mat-header-cell *matHeaderCellDef>
+        {{ "create_ticket.form.files" | translate }}
+      </th>
+      <td mat-cell *matCellDef="let ticket">{{ ticket.files_count }}</td>
+    </ng-container>
+
+    <!-- Status Column -->
+    <ng-container matColumnDef="status">
+      <th mat-header-cell *matHeaderCellDef>
+        {{ "client.table.status" | translate }}
+      </th>
+      <td mat-cell *matCellDef="let ticket">
+        <div class="progress-container">
+          <div class="progress-bar" [style.width]="statusToPercentage(ticket.status) + '%'"></div>
+        </div>
+      </td>
+    </ng-container>
+
+    <tr
+      mat-header-row
+      *matHeaderRowDef="[
+        'id',
+        'title',
+        'description',
+        'brand',
+        'serial_number',
+        'files_count',
+        'status'
+      ]"
+    ></tr>
+    <tr
+      mat-row
+      *matRowDef="
+        let row;
+        columns: [
+          'id',
+          'title',
+          'description',
+          'brand',
+          'serial_number',
+          'files_count',
+          'status'
+        ]
+      "
+    ></tr>
+  </table>

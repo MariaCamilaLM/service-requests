@@ -1,0 +1,8 @@
+<mat-tab-group>
+  <mat-tab label="{{ 'tickets.assigned' | translate }}">
+    <app-tickets-table role="engineer"></app-tickets-table>
+  </mat-tab>
+  <mat-tab label="{{ 'tickets.unassigned' | translate }} ">
+    <app-tickets-table role="unassigned"></app-tickets-table>
+  </mat-tab>
+</mat-tab-group>

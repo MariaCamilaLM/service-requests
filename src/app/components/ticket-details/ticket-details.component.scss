@@ -1,0 +1,85 @@
+.ticket-details-container {
+  width: 80%;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.mat-card {
+  margin-bottom: 50px;
+}
+
+.mat-card-header {
+  background-color: #4caf50;
+  color: white;
+}
+
+.mat-card-title {
+  font-size: 1.5rem;
+  margin: 0;
+}
+
+.mat-card-content {
+  padding: 15px;
+}
+
+.comment {
+  margin: 10px 0;
+  padding: 10px;
+  border-left: 4px solid #4caf50;
+  background-color: #fff;
+  border-radius: 4px;
+}
+
+.open-file {
+  cursor: pointer;
+  color: #2196f3;
+}
+
+.open-file:hover {
+  text-decoration: underline;
+}
+
+.progress-container {
+  background-color: #e0e0e0;
+  border-radius: 4px;
+  height: 20px;
+  width: 100%;
+  margin-top: 5px;
+}
+
+.progress-bar {
+  background-color: #2e3b4e;
+  height: 100%;
+  border-radius: 4px;
+  transition: width 0.5s;
+}
+
+textarea {
+  width: 100%;
+  resize: none;
+  margin-bottom: 10px;
+}
+
+button {
+  margin-top: 10px;
+}
+
+.comments-card,
+.upload-files-card,
+.change-status-card {
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 10px;
+}
+
+.mat-form-field {
+  width: 100%;
+}
+
+.mat-card-actions {
+  display: flex;
+  justify-content: flex-end;
+  padding: 10px;
+}

@@ -1,0 +1,40 @@
+.tickets-container {
+    padding: 20px;
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  th,
+  td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: left;
+  }
+  
+  .progress-container {
+    width: 100%;
+    background-color: #f3f3f3;
+    border-radius: 4px;
+  }
+  
+  .progress-bar {
+    height: 10px;
+    background-color: #2e3b4e; // Green for progress
+    border-radius: 4px;
+  }
+  
+
+  .open-ticket {
+    cursor: pointer;
+    text-decoration: underline;
+    text-decoration-style: dotted;
+  }
+
+  .open-ticket:hover {
+    background-color: #2e3b4e;
+    color: #ddd;
+    text-decoration-style: solid;
+  }

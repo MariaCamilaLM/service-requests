@@ -1,0 +1,29 @@
+<div class="login-container">
+  <div class="form-box">
+    <img src="logo.webp" alt="Logo" class="logo" />
+    <h2>{{ 'user.login' | translate }}</h2>
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <mat-form-field appearance="fill">
+        <mat-label>{{ 'user.email' | translate }}</mat-label>
+        <input matInput formControlName="email" required />
+        <mat-error *ngIf="loginForm.get('email')?.invalid">
+          {{ 'user.invalid.email' | translate }}
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>{{ 'user.password' | translate }}</mat-label>
+        <input matInput type="password" formControlName="password" required />
+        <mat-error *ngIf="loginForm.get('password')?.invalid">
+          {{ 'user.password.required' | translate }}
+        </mat-error>
+      </mat-form-field>
+
+      <button mat-raised-button type="submit" [disabled]="loginForm.invalid">
+        {{ 'user.login' | translate }}
+      </button>
+    </form>
+
+    <app-language-selector></app-language-selector>
+  </div>
+</div>
