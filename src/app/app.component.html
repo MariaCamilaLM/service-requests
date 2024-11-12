@@ -28,6 +28,9 @@
       <ng-container *ngIf="isAuthenticated() != ''">
         <a mat-list-item (click)="logout()">{{ "user.logout" | translate }}</a>
       </ng-container>
+      <ng-container *ngIf="isAuthenticated() == ''">
+        <a mat-list-item routerLink="/login">{{ "user.login" | translate }}</a>
+      </ng-container>
       <app-language-selector></app-language-selector>
     </mat-nav-list>
   </mat-drawer>
