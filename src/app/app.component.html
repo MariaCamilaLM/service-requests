@@ -10,7 +10,9 @@
     [opened]="drawerOpened"
   >
     <h2>Menu</h2>
-    <b>{{ getName() }} - {{ getRole() | translate }}</b>
+    <b *ngIf="isAuthenticated() != ''"
+      >{{ getName() }} - {{ getRole() | translate }}</b
+    >
     <mat-nav-list>
       <ng-container *ngIf="getRole() === 'client' && showSidebar">
         <a mat-list-item routerLink="/client">{{
