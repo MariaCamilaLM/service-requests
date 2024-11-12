@@ -1,24 +1,38 @@
 <mat-drawer-container class="example-container">
-    <mat-drawer mode="side" opened class="sidenav" [opened]="drawerOpened">
-      <h2>Menu</h2>
-      <mat-nav-list>
-        <ng-container *ngIf="getRole() === 'client' && showSidebar">
-          <a mat-list-item routerLink="/client">Client Dashboard</a>
-          <a mat-list-item routerLink="/client/create-request">Create New Request</a>
-          <a mat-list-item routerLink="/client/change-profile">Change Profile</a>
-        </ng-container>
-        <ng-container *ngIf="getRole() === 'engineer' && showSidebar">
-          <a mat-list-item routerLink="/engineer">Engineer Dashboard</a>
-          <a mat-list-item routerLink="/engineer/manage-requests">Manage Requests</a>
-          <a mat-list-item routerLink="/engineer/view-reports">View Reports</a>
-        </ng-container>
-        <a mat-list-item routerLink="/other">Other Links</a>
-        <app-language-selector></app-language-selector>
-      </mat-nav-list>
-    </mat-drawer>
-  
-    <mat-drawer-content>
-      <router-outlet></router-outlet>
-    </mat-drawer-content>
-  </mat-drawer-container>
-  
+  <mat-drawer
+    mode="side"
+    opened
+    class="sidenav"
+    [ngClass]="{
+      default: getRole() !== 'engineer',
+      engineer: getRole() === 'engineer'
+    }"
+    [opened]="drawerOpened"
+  >
+    <h2>Menu</h2>
+    <b>{{ getName() }} - {{ getRole() | translate }}</b>
+    <mat-nav-list>
+      <ng-container *ngIf="getRole() === 'client' && showSidebar">
+        <a mat-list-item routerLink="/client">{{
+          "client.dashboard" | translate
+        }}</a>
+        <a mat-list-item routerLink="/client/create-request">{{
+          "client.create_request" | translate
+        }}</a>
+      </ng-container>
+      <ng-container *ngIf="getRole() === 'engineer' && showSidebar">
+        <a mat-list-item routerLink="/engineer">{{
+          "engineer.dashboard" | translate
+        }}</a>
+      </ng-container>
+      <ng-container *ngIf="isAuthenticated() != ''">
+        <a mat-list-item (click)="logout()">{{ "user.logout" | translate }}</a>
+      </ng-container>
+      <app-language-selector></app-language-selector>
+    </mat-nav-list>
+  </mat-drawer>
+
+  <mat-drawer-content>
+    <router-outlet></router-outlet>
+  </mat-drawer-content>
+</mat-drawer-container>

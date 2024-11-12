@@ -5,6 +5,7 @@ import { statusToPercentage, Ticket } from '../../models/ticket.model';
 import { TicketService } from '../../services/ticket.service';
 import { TranslationService } from '../../services/translation.service';
 import { Router } from '@angular/router';
+import { PusherService } from '../../services/pusher.service';
 
 @Component({
   selector: 'app-tickets-table',
@@ -22,32 +23,20 @@ export class TicketsTableComponent implements OnInit {
 
   constructor(
     private ticketService: TicketService,
-    private translationService: TranslationService,
-    private router: Router
+    private router: Router,
+    private pusher: PusherService
   ) {}
 
   ngOnInit(): void {
-    switch (this.role) {
-      case 'engineer':
-        this.loadTicketsEngineer();
-        break;
-      case 'unassigned':
-        this.loadUnassignedTickets();
-        break;
-      default:
-        this.loadTicketsClient();
-        break;
-    }
-    this.translationService.translations$.subscribe((translations) => {
-      this.translations = translations;
-    });
+    this.listerForEvents();
+    this.loadTickets();
   }
 
   loadTicketsClient(): void {
     this.ticketService.getTicketsClient().subscribe({
       next: (tickets: Ticket[]) => {
         this.tickets = tickets;
-      }
+      },
     });
   }
 
@@ -71,5 +60,32 @@ export class TicketsTableComponent implements OnInit {
 
   showTicket(ticketId: number) {
     this.router.navigate(['ticket', ticketId]);
+  }
+
+  listerForEvents(): void {
+    const channel = 'tickets';
+    const ticketUpdated = 'TicketUpdated';
+    const ticketCreated = 'TicketCreated';
+    this.pusher.subscribeToChannel(channel);
+    this.pusher.bindToEvent(ticketUpdated, () => {
+      this.loadTickets();
+    });
+    this.pusher.bindToEvent(ticketCreated, () => {
+      this.loadTickets();
+    });
+  }
+
+  loadTickets(): void {
+    switch (this.role) {
+      case 'engineer':
+        this.loadTicketsEngineer();
+        break;
+      case 'unassigned':
+        this.loadUnassignedTickets();
+        break;
+      default:
+        this.loadTicketsClient();
+        break;
+    }
   }
 }

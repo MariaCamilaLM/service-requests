@@ -7,6 +7,6 @@ export const environment = {
     clientId: '1',
     clientSecret: 'EJVqSndQVvyn20yo7DLRcMvh1AuG8rjiGSImZxN5',
     soketiAppKey: 'app-key',
-    soketiHost: '34.67.48.93'
+    soketiHost: '127.0.0.1'
   };
   

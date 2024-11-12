@@ -45,6 +45,14 @@ export class AuthService {
     this.cookieService.set('user_role', role);
   }
 
+  setName(name: string) {
+    this.cookieService.set('user_name', name);
+  }
+
+  getName(): string {
+    return this.cookieService.get('user_name');
+  }
+
   getRole(): string | null {
     return this.cookieService.get('user_role'); 
   }
@@ -61,5 +69,9 @@ export class AuthService {
         return this.getCurrentRole(); 
       })
     );
+  }
+
+  logout(): void {
+    this.cookieService.deleteAll();
   }
 }

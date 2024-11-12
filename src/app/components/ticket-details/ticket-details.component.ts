@@ -64,15 +64,19 @@ export class TicketDetailsComponent implements OnInit, OnDestroy {
     this.ticketId = ticketId === null ? '' : ticketId;
     if (this.ticketId) {
       this.listenForEvents();
-      this.ticketService.getTicketById(this.ticketId).subscribe({
-        next: (data: Ticket) => {
-          this.ticket = data;
-        },
-        error: (error: any) => {
-          console.error('Error fetching ticket details:', error);
-        },
-      });
+      this.loadTicket();
     }
+  }
+
+  loadTicket(): void {
+    this.ticketService.getTicketById(this.ticketId).subscribe({
+      next: (data: Ticket) => {
+        this.ticket = data;
+      },
+      error: (error: any) => {
+        console.error('Error fetching ticket details:', error);
+      },
+    });
   }
 
   openFile(file: any, index: number, ticketId: any) {
@@ -116,6 +120,7 @@ export class TicketDetailsComponent implements OnInit, OnDestroy {
     const channel = `ticket.${this.ticketId}`;
     const comments = 'CommentPosted';
     const files = 'FileUploaded';
+    const changes = 'TicketUpdated';
 
     this.pusherService.subscribeToChannel(channel);
     this.pusherService.bindToEvent(comments, (data) => {
@@ -123,8 +128,11 @@ export class TicketDetailsComponent implements OnInit, OnDestroy {
     });
 
     this.pusherService.bindToEvent(files, (data) => {
-      console.log(data);
       this.ticket.files?.push(data.file);
+    });
+
+    this.pusherService.bindToEvent(changes, () => {
+      this.loadTicket();
     });
   }
 
@@ -147,7 +155,15 @@ export class TicketDetailsComponent implements OnInit, OnDestroy {
     });
   }
 
-  changeTicketStatus() {}
+  changeTicketStatus() {
+    const ticketStatusMap = Object.entries(TicketStatus).find(([, status]) => status === this.selectedStatus);
+    this.ticket.status = ticketStatusMap ? ticketStatusMap[1] : TicketStatus.Open;
+    console.log(ticketStatusMap);
+    this.ticketService.changeStatus(this.ticket).subscribe({
+      error: () => {},
+      next: () => {},
+    });
+  }
 
   isEngineer(): boolean {
     return this.authService.getRole() === 'engineer';
@@ -164,4 +180,5 @@ export class TicketDetailsComponent implements OnInit, OnDestroy {
       error: () => {},
     });
   }
+
 }

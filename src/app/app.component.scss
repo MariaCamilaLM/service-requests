@@ -11,12 +11,24 @@ mat-drawer-content {
 }
 
 .sidenav {
-  width: 250px; // Width of the sidebar
-  background-color: #2e3b4e; // Dark blue for sidebar
+  width: 250px;
   color: white;
+}
+
+.default {
+  background-color: #2e3b4e;
+}
+
+.engineer {
+  background-color: #00756f;
 }
 
 .sidenav a {
   color: white; // White text for links
 }
+
+h2, b {
+  padding-left: 10px;
+}
+
 

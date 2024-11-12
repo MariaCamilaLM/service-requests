@@ -1,33 +1,36 @@
 # Stage 1: Build the Angular app
-FROM node:18 AS build
+FROM node:18 AS builder
 
-# Set working directory
+# Set the working directory
 WORKDIR /app
 
-# Copy package.json and package-lock.json
+# Copy the package.json and package-lock.json files
 COPY package*.json ./
 
 # Install dependencies
 RUN npm install
 
-# Install Angular CLI globally
-RUN npm install -g @angular/cli
-
-# Copy the entire Angular project
+# Copy the entire app source code
 COPY . .
 
-# Build the Angular app for production
-RUN ["ng", "build"]
+# Build the Angular app for SSR
+RUN npm run build:ssr
 
+# Stage 2: Serve the app with Node.js
+FROM node:18
 
-# Stage 2: Serve the app with Nginx
-FROM nginx:alpine
+# Set the working directory in the final image
+WORKDIR /app
 
-# Copy built files from Stage 1 to Nginx's default public folder
-COPY --from=build /app/dist/frontend /usr/share/nginx/html
+# Copy the built files from the builder stage
+COPY --from=builder /app/dist/ ./dist
 
-# Expose port 80
-EXPOSE 80
+# Install only production dependencies (if there are any)
+COPY package*.json ./
+RUN npm install --only=production
 
-# Start Nginx server
-CMD ["nginx", "-g", "daemon off;"]
+# Expose the port your app will run on
+EXPOSE 4000
+
+# Run the Node server to serve the SSR app
+CMD ["node", "dist/server/server.js"]

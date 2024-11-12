@@ -47,6 +47,8 @@
   height: 20px;
   width: 100%;
   margin-top: 5px;
+  position: relative;
+  overflow: hidden;
 }
 
 .progress-bar {
@@ -54,7 +56,13 @@
   height: 100%;
   border-radius: 4px;
   transition: width 0.5s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: bold;
 }
+
 
 textarea {
   width: 100%;

@@ -44,12 +44,14 @@ export class TicketService {
   }
 
   uploadFile(files: FormData, ticketId: string): Observable<any> {
-    return this.http.post(`${this.apiUrl}/${ticketId}/upload-file`, 
-      files,
-    );
+    return this.http.post(`${this.apiUrl}/${ticketId}/upload-file`, files);
   }
 
   assignToMe(ticketId: string): Observable<any> {
     return this.http.get(`${this.apiUrl}/assign-to-me/${ticketId}`);
+  }
+
+  changeStatus(ticket: Ticket) {
+    return this.http.post(`${this.apiUrl}/change-status/${ticket.id}`, ticket);
   }
 }

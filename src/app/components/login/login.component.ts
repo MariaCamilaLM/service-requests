@@ -57,6 +57,7 @@ export class LoginComponent implements OnInit {
       this.authService.loginAndGetRole(user).subscribe({
         next: (response) => {
           this.authService.storeRole(response.role);
+          this.authService.setName(response.name);
           if (response.role === 'client') {
             this.router.navigate(['/client']); 
           } else if (response.role === 'engineer') {
