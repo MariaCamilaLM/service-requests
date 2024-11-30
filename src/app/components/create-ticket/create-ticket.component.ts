@@ -15,6 +15,7 @@ import { MatSelect } from '@angular/material/select';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { TranslatePipe } from '../../pipes/translate.pipe';
 import { FileUploadComponent } from '../file-upload/file-upload.component';
+import { MatButton } from '@angular/material/button';
 
 @Component({
   selector: 'app-create-ticket',
@@ -31,6 +32,7 @@ import { FileUploadComponent } from '../file-upload/file-upload.component';
     MatCheckboxModule,
     TranslatePipe,
     FileUploadComponent,
+    MatButton,
   ],
 })
 export class CreateTicketComponent {
@@ -45,7 +47,6 @@ export class CreateTicketComponent {
     this.createTicketForm = this.fb.group({
       title: ['', [Validators.required]],
       issue_description: ['', [Validators.required]],
-      equipment_number: ['', [Validators.required]],
       serial_number: ['', [Validators.required]],
       brand: ['', [Validators.required]],
       is_under_warranty: [false],

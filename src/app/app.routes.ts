@@ -7,6 +7,7 @@ import { CreateTicketComponent } from './components/create-ticket/create-ticket.
 import { TicketDetailsComponent } from './components/ticket-details/ticket-details.component';
 import { EngineerDashboardComponent } from './components/engineer-dashboard/engineer-dashboard.component';
 import { engineerRoleGuard } from './guards/engineer-role.guard';
+import { KnowledgeBaseComponent } from './components/knowledge-base/knowledge-base.component';
 
 export const routes: Routes = [
   {
@@ -29,5 +30,9 @@ export const routes: Routes = [
     path: 'engineer',
     canActivate: [AuthGuard, engineerRoleGuard],
     component: EngineerDashboardComponent
+  },
+  {
+    path: 'kb',
+    component: KnowledgeBaseComponent
   }
 ];

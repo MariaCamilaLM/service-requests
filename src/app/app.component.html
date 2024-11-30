@@ -9,7 +9,7 @@
     }"
     [opened]="drawerOpened"
   >
-    <h2>Menu</h2>
+    <h2>{{ 'user.menu' | translate }}</h2>
     <b *ngIf="isAuthenticated() != ''"
       >{{ getName() }} - {{ getRole() | translate }}</b
     >
@@ -25,6 +25,11 @@
       <ng-container *ngIf="getRole() === 'engineer' && showSidebar">
         <a mat-list-item routerLink="/engineer">{{
           "engineer.dashboard" | translate
+        }}</a>
+      </ng-container>
+      <ng-container *ngIf="showSidebar">
+        <a mat-list-item routerLink="/kb">{{
+          "user.knowledge.base" | translate
         }}</a>
       </ng-container>
       <ng-container *ngIf="isAuthenticated() != ''">

@@ -1,11 +1,15 @@
-<div class="upload-container" 
-     (drop)="onFileDropped($event)" 
-     (dragover)="onDragOver($event)"
-     (dragleave)="onDragLeave($event)">
-  <h3>Drop your files here or click to upload</h3>
-  <button mat-raised-button (click)="triggerFileUpload()">Upload Files</button>
+<div
+  class="upload-container"
+  (drop)="onFileDropped($event)"
+  (dragover)="onDragOver($event)"
+  (dragleave)="onDragLeave($event)"
+>
+  <h3>{{ "user.drop.files" | translate }}</h3>
+  <button mat-raised-button (click)="triggerFileUpload()">
+    {{ "user.upload.files" | translate }}
+  </button>
   <div *ngIf="selectedFiles.length > 0">
-    <h4>Selected Files:</h4>
+    <h4>{{ "user.selected.files" | translate }}</h4>
     <ul>
       <li *ngFor="let file of selectedFiles">{{ file.name }}</li>
     </ul>

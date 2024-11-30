@@ -16,12 +16,6 @@
     </mat-form-field>
 
     <mat-form-field appearance="fill">
-      <mat-label>{{ 'create_ticket.form.equipment_number' | translate }}</mat-label>
-      <input matInput formControlName="equipment_number" required />
-      <mat-error *ngIf="createTicketForm.get('equipment_number')?.invalid">{{ 'create_ticket.errors.equipment_number_required' | translate }}</mat-error>
-    </mat-form-field>
-
-    <mat-form-field appearance="fill">
       <mat-label>{{ 'create_ticket.form.serial_number' | translate }}</mat-label>
       <input matInput formControlName="serial_number" required />
       <mat-error *ngIf="createTicketForm.get('serial_number')?.invalid">{{ 'create_ticket.errors.serial_number_required' | translate }}</mat-error>

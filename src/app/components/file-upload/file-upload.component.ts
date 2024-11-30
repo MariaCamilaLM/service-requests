@@ -1,10 +1,16 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Output } from '@angular/core';
+import { TranslatePipe } from '../../pipes/translate.pipe';
+import { MatButton } from '@angular/material/button';
 
 @Component({
   selector: 'app-file-upload',
   standalone: true,
-  imports: [CommonModule],
+  imports: [
+    CommonModule,
+    TranslatePipe,
+    MatButton,
+  ],
   templateUrl: './file-upload.component.html',
   styleUrls: ['./file-upload.component.scss']
 })
