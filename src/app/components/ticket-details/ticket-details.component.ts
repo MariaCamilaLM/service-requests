@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { TicketService } from '../../services/ticket.service';
 import {
   statusToPercentage,
@@ -56,7 +56,8 @@ export class TicketDetailsComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private ticketService: TicketService,
     private pusherService: PusherService,
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -176,7 +177,9 @@ export class TicketDetailsComponent implements OnInit, OnDestroy {
 
   assignToMe() {
     this.ticketService.assignToMe(this.ticketId).subscribe({
-      next: () => {},
+      next: () => {
+        this.router.navigate(['engineer']);
+      },
       error: () => {},
     });
   }
